@@ -1,5 +1,5 @@
-import { PALETTE } from "../assets/common/palette";
 import React from "react";
+import { PALETTE } from "../assets/common/palette";
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 
 export function Avatar() {
@@ -38,9 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: PALETTE.primaryBgColor,
   },
   addAvatarIcon: {
-    // width: 20,
-    // height: 20,
-
+    position: "absolute",
     fontSize: 20,
     color: PALETTE.accentColor,
   },

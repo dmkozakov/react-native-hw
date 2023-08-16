@@ -1,9 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import { KeyboardAvoidingViewBase, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import { useFonts } from "expo-font";
-import KeyboardAvoidingComponent from "./src/screens/FuckingTest";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ "Roboto": require("./src/assets/fonts/Roboto-Black.ttf") });
@@ -14,8 +13,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <RegistrationScreen /> */}
-      <LoginScreen />
+      <RegistrationScreen />
+      {/* <LoginScreen /> */}
       <StatusBar style="auto" />
     </View>
   );

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { ActionBtn } from "./ActionBtn";
 import { PALETTE } from "../assets/common/palette";
 import { TextBtn } from "./TextBtn";
@@ -12,7 +12,7 @@ function LoginForm() {
       <View style={styles.form}>
         <CustomInput style={[styles.input]} placeholder="Адреса електронної пошти" />
         <View position="relative">
-          <CustomInput placeholder="Пароль" type="password" style={[styles.input]} />
+          <CustomInput placeholder="Пароль" style={[styles.input]} secureTextEntry />
           <TextBtn text={"Показати"} style={styles.showBtn} />
         </View>
       </View>
