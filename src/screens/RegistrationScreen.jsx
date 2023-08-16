@@ -1,70 +1,38 @@
 import {
   ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableHighlight,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { PALETTE } from "../assets/common/palette";
+import { TextBtn } from "../components/TextBtn";
+import { Avatar } from "../components/Avatar";
+import { SignUpForm } from "../components/SignUpForm";
+import { keyboardBehavior } from "../assets/common/keyboardBehaviour";
+
 import bgImage from "../assets/img/bgImage.jpg";
 
-export const RegistrationScreen = () => {
+const RegistrationScreen = () => {
   return (
-    <View style={styles.container}>
-      <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
-        <View style={styles.register}>
-          <View alignItems="center">
-            <View style={styles.avatar}>
-              <TouchableHighlight
-                activeOpacity={0.6}
-                underlayColor="#ffa667"
-                onPress={() => console.log("Зареєструватися")}
-                style={styles.addAvatarBtn}
-              >
-                <View style={styles.addAvatarBtnBox}>
-                  <Text>+</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={100}
+        behavior={keyboardBehavior}
+        style={styles.container}
+      >
+        <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+          <View style={styles.register}>
+            <Avatar />
+            <Text style={styles.title}>Реєстрація</Text>
+            <SignUpForm />
+            <TextBtn text={"Вже є акаунт? Увійти"} style={styles.loginBtnText} />
           </View>
-          <Text style={styles.title}>Реєстрація</Text>
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Логін"
-              placeholderTextColor={"#BDBDBD"}
-            ></TextInput>
-            <TextInput
-              style={styles.input}
-              placeholder="Адреса електронної пошти"
-              placeholderTextColor={"#BDBDBD"}
-            ></TextInput>
-            <View position="relative">
-              <TextInput
-                style={styles.input}
-                placeholder="Пароль"
-                placeholderTextColor={"#BDBDBD"}
-              ></TextInput>
-              <TouchableOpacity>
-                <Text style={styles.showBtn}>Показати</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <TouchableHighlight
-            activeOpacity={0.6}
-            underlayColor="#ffa667"
-            onPress={() => console.log("Зареєструватися")}
-            style={styles.registerBtn}
-          >
-            <Text style={styles.registerBtnText}>Зареєструватися</Text>
-          </TouchableHighlight>
-          <TouchableOpacity>
-            <Text style={styles.loginBtnText}>Вже є акаунт? Увійти</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -76,39 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
   },
-  avatar: {
-    position: "absolute",
-    transform: "translateY(-76px)",
-    width: 120,
-    height: 120,
-    borderRadius: 16,
-    backgroundColor: "#F6F6F6",
-  },
-  addAvatarBtn: {
-    position: "absolute",
-    right: -12.5,
-    bottom: 15,
-  },
-  addAvatarBtnBox: {
-    justifyContent: "center",
-    alignItems: "center",
-
-    width: 25,
-    height: 25,
-    borderColor: "#FF6C00",
-    borderWidth: 1,
-    borderRadius: 25,
-    backgroundColor: "#fff",
-  },
-  title: {
-    marginTop: 92,
-    marginBottom: 33,
-    fontFamily: "Roboto",
-    fontSize: 30,
-    fontWeight: "500",
-    textAlign: "center",
-    color: "#212121",
-  },
   register: {
     position: "relative",
     flex: 0.65,
@@ -116,44 +51,16 @@ const styles = StyleSheet.create({
     padding: 16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    backgroundColor: "#FFF",
+    backgroundColor: PALETTE.primaryBgColor,
   },
-  form: {
-    // flexDirection: "column",
-    gap: 16,
-  },
-  input: {
-    fontSize: 16,
-    padding: 16,
-    height: 50,
-    color: "#212121",
-    backgroundColor: "#F6F6F6",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E8E8E8",
-  },
-  showBtn: {
-    position: "absolute",
-    right: 16,
-    bottom: 16,
+  title: {
+    marginTop: 76,
+    marginBottom: 33,
     fontFamily: "Roboto",
-    fontSize: 16,
-    fontWeight: "400",
-    color: "#1B4371",
-  },
-  registerBtn: {
-    width: "100%",
-    marginTop: 43,
-    padding: 16,
-    borderRadius: 100,
-    backgroundColor: "#FF6C00",
-  },
-  registerBtnText: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
-    fontSize: 16,
+    fontSize: 30,
+    fontWeight: "500",
     textAlign: "center",
-    color: "#fff",
+    color: PALETTE.primaryTextColor,
   },
   loginBtnText: {
     marginTop: 16,
@@ -161,7 +68,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontSize: 16,
     fontWeight: "400",
-    color: "#1B4371",
+    color: PALETTE.secondaryTextColor,
   },
 });
 
