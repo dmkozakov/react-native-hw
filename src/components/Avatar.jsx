@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   avatar: {
     position: "absolute",
     alignSelf: "center",
-    top: -76,
+    top: -60,
     width: 120,
     height: 120,
     borderRadius: 16,

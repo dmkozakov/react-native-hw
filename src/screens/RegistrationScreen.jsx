@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: PALETTE.primaryBgColor,
   },
   title: {
-    marginTop: 76,
+    marginTop: 92,
     marginBottom: 33,
     fontFamily: "Roboto",
     fontSize: 30,
