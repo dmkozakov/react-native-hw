@@ -10,9 +10,19 @@ function LoginForm() {
   return (
     <>
       <View style={styles.form}>
-        <CustomInput style={[styles.input]} placeholder="Адреса електронної пошти" />
+        <CustomInput
+          style={[styles.input]}
+          placeholder="Адреса електронної пошти"
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
         <View position="relative">
-          <CustomInput placeholder="Пароль" style={[styles.input]} secureTextEntry />
+          <CustomInput
+            placeholder="Пароль"
+            style={[styles.input]}
+            autoCapitalize="none"
+            secureTextEntry
+          />
           <TextBtn text={"Показати"} style={styles.showBtn} />
         </View>
       </View>
@@ -32,6 +42,9 @@ const styles = StyleSheet.create({
     padding: 16,
     height: 50,
     borderRadius: 8,
+    color: PALETTE.primaryTextColor,
+    backgroundColor: PALETTE.secondaryBgColor,
+    borderColor: PALETTE.borderColor,
   },
   showBtn: {
     position: "absolute",

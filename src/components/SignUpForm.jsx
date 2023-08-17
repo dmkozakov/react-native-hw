@@ -18,12 +18,16 @@ export function SignUpForm() {
           style={styles.input}
           placeholder="Адреса електронної пошти"
           placeholderTextColor={PALETTE.inputColor}
+          autoCapitalize="none"
+          keyboardType="email-address"
         />
         <View position="relative">
           <CustomInput
             style={styles.input}
             placeholder="Пароль"
             placeholderTextColor={PALETTE.inputColor}
+            autoCapitalize="none"
+            secureTextEntry
           />
           <TextBtn text={"Показати"} style={styles.showBtn} />
         </View>

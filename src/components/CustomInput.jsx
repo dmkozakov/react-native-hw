@@ -17,14 +17,7 @@ function CustomInput({ placeholder, style, ...props }) {
     <TextInput
       onFocus={handleFocus}
       onBlur={handleBLur}
-      style={[
-        styles.input,
-        style,
-        {
-          borderColor: isFocused ? PALETTE.accentColor : PALETTE.borderColor,
-          backgroundColor: isFocused ? PALETTE.primaryBgColor : PALETTE.secondaryBgColor,
-        },
-      ]}
+      style={[styles.input, style, isFocused && styles.inputActive]}
       placeholder={placeholder}
       placeholderTextColor={PALETTE.inputColor}
       {...props}
@@ -36,6 +29,10 @@ const styles = StyleSheet.create({
   input: {
     color: PALETTE.primaryTextColor,
     borderWidth: 1,
+  },
+  inputActive: {
+    borderColor: PALETTE.accentColor,
+    backgroundColor: PALETTE.primaryBgColor,
   },
 });
 

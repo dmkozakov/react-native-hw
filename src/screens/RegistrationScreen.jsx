@@ -11,18 +11,14 @@ import { PALETTE } from "../assets/common/palette";
 import { TextBtn } from "../components/TextBtn";
 import { Avatar } from "../components/Avatar";
 import { SignUpForm } from "../components/SignUpForm";
-import { keyboardBehavior } from "../assets/common/keyboardBehaviour";
+import { keyboardBehavior } from "../assets/common/keyboardBehavior";
 
 import bgImage from "../assets/img/bgImage.jpg";
 
 const RegistrationScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={100}
-        behavior={keyboardBehavior}
-        style={styles.container}
-      >
+      <KeyboardAvoidingView behavior={keyboardBehavior} style={styles.container}>
         <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
           <View style={styles.register}>
             <Avatar />
@@ -46,9 +42,9 @@ const styles = StyleSheet.create({
   },
   register: {
     position: "relative",
-    flex: 0.65,
     flexDirection: "column",
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 45,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: PALETTE.primaryBgColor,

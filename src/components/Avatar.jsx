@@ -1,14 +1,13 @@
 import React from "react";
 import { PALETTE } from "../assets/common/palette";
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
 export function Avatar() {
   return (
     <View style={styles.avatar}>
       <TouchableWithoutFeedback>
-        <View style={styles.addAvatarBtnBox}>
-          <Text style={styles.addAvatarIcon}>+</Text>
-        </View>
+        <Feather name="plus-circle" size={25} style={styles.addAvatarBtn} />
       </TouchableWithoutFeedback>
     </View>
   );
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: PALETTE.secondaryBgColor,
   },
-  addAvatarBtnBox: {
+  addAvatarBtn: {
     position: "absolute",
     right: -12.5,
     bottom: 15,
@@ -32,14 +31,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 25,
     height: 25,
-    borderColor: PALETTE.accentColor,
-    borderWidth: 1,
+    color: PALETTE.accentColor,
     borderRadius: 25,
     backgroundColor: PALETTE.primaryBgColor,
-  },
-  addAvatarIcon: {
-    position: "absolute",
-    fontSize: 20,
-    color: PALETTE.accentColor,
   },
 });

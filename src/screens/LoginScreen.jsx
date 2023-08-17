@@ -8,28 +8,23 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { keyboardBehavior } from "../assets/common/keyboardBehaviour";
+import { keyboardBehavior } from "../assets/common/keyboardBehavior";
 import { PALETTE } from "../assets/common/palette";
 
 import bgImage from "../assets/img/bgImage.jpg";
-import { TextBtn } from "../components/TextBtn";
 import LoginForm from "../components/LoginForm";
 
 export const LoginScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={100}
-        behavior={keyboardBehavior}
-        style={styles.container}
-      >
+      <KeyboardAvoidingView behavior={keyboardBehavior} style={styles.container}>
         <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
           <View style={styles.register}>
             <Text style={styles.title}>Увійти</Text>
             <LoginForm />
             <TouchableOpacity>
               <Text style={styles.loginBtnText}>
-                Немає акаунту?{" "}
+                Немає акаунту?
                 <Text style={{ textDecorationLine: "underline" }}>Зареєструватися</Text>
               </Text>
             </TouchableOpacity>
@@ -50,9 +45,9 @@ const styles = StyleSheet.create({
   },
   register: {
     position: "relative",
-    flex: 0.55,
     flexDirection: "column",
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 112,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: PALETTE.primaryBgColor,
