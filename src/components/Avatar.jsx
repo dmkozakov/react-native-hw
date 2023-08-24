@@ -6,7 +6,11 @@ import { Feather } from "@expo/vector-icons";
 export function Avatar() {
   return (
     <View style={styles.avatar}>
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          console.log("Add photo");
+        }}
+      >
         <Feather name="plus-circle" size={25} style={styles.addAvatarBtn} />
       </TouchableWithoutFeedback>
     </View>
