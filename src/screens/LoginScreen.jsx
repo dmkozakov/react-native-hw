@@ -17,7 +17,11 @@ import LoginForm from "../components/LoginForm";
 export const LoginScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView behavior={keyboardBehavior} style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={keyboardBehavior}
+        style={styles.container}
+        keyboardVerticalOffset={-100}
+      >
         <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
           <View style={styles.register}>
             <Text style={styles.title}>Увійти</Text>
@@ -45,7 +49,6 @@ const styles = StyleSheet.create({
   },
   register: {
     position: "relative",
-    flexDirection: "column",
     paddingHorizontal: 16,
     paddingBottom: 112,
     borderTopLeftRadius: 25,

@@ -18,7 +18,11 @@ import bgImage from "../assets/img/bgImage.jpg";
 const RegistrationScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView behavior={keyboardBehavior} style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={keyboardBehavior}
+        style={styles.container}
+        keyboardVerticalOffset={-175}
+      >
         <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
           <View style={styles.register}>
             <Avatar />
@@ -42,7 +46,6 @@ const styles = StyleSheet.create({
   },
   register: {
     position: "relative",
-    flexDirection: "column",
     paddingHorizontal: 16,
     paddingBottom: 45,
     borderTopLeftRadius: 25,
