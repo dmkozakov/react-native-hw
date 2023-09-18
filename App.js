@@ -7,6 +7,7 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import CommentsScreen from "./src/screens/CommentsScreen";
 
 const MainStack = createStackNavigator();
 
@@ -35,6 +36,7 @@ export default function App() {
           component={ProfileScreen}
           options={{ headerShown: false }}
         />
+        <MainStack.Screen name="CommentsScreen" component={CommentsScreen} />
         <MainStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       </MainStack.Navigator>
     </NavigationContainer>

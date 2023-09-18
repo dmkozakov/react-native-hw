@@ -17,6 +17,11 @@ import { useNavigation } from "@react-navigation/native";
 
 function ProfileScreen() {
   const navigation = useNavigation();
+
+  onCommentPress = () => {
+    navigation.navigate("CommentsScreen");
+  };
+
   return (
     <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
       <View style={styles.profile}>
@@ -31,14 +36,14 @@ function ProfileScreen() {
           <Feather name="log-out" size={24} color={PALETTE.secondaryColor} />
         </TouchableOpacity>
 
-        <ScrollView c contentContainerStyle={styles.postsContainer}>
+        <ScrollView contentContainerStyle={styles.postsContainer}>
           <View style={styles.post}>
             <Image source={mountain} style={styles.postImage} />
             <Text style={[globalStyles.text, styles.description]}>Ліс</Text>
 
             <View style={styles.postInfo}>
               <View style={styles.actionBoxWrapper}>
-                <TouchableOpacity style={styles.actionBox}>
+                <TouchableOpacity style={styles.actionBox} onPress={onCommentPress}>
                   <Feather name="message-circle" size={24} color={PALETTE.accentColor} />
                   <Text style={globalStyles.text}>8</Text>
                 </TouchableOpacity>
