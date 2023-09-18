@@ -13,7 +13,11 @@ function CommentsScreen() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView behavior={keyboardBehavior} style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={keyboardBehavior}
+        style={styles.container}
+        keyboardVerticalOffset={-170}
+      >
         <CommentPost />
         <CommentBar />
       </KeyboardAvoidingView>

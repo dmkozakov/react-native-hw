@@ -2,18 +2,14 @@ import PostsScreen from "./PostsScreen";
 import ProfileScreen from "./ProfileScreen";
 import CreatePostsScreen from "./CreatePostsScreen";
 
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { getHeaderTitle } from "@react-navigation/elements";
 import { StyleSheet } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
 import { PALETTE } from "../assets/common/palette";
-import { ActionBtn } from "../components/ActionBtn";
 import { View } from "react-native";
 import CustomHeader from "../components/CustomHeader";
-
-// ...
 
 const Tabs = createBottomTabNavigator();
 

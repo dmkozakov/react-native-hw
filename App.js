@@ -1,5 +1,4 @@
 import "react-native-gesture-handler";
-import { StyleSheet } from "react-native";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import Home from "./src/screens/Home";
@@ -8,6 +7,8 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import CommentsScreen from "./src/screens/CommentsScreen";
+import { getHeaderTitle } from "@react-navigation/elements";
+import CustomHeader from "./src/components/CustomHeader";
 
 const MainStack = createStackNavigator();
 
@@ -36,15 +37,20 @@ export default function App() {
           component={ProfileScreen}
           options={{ headerShown: false }}
         />
-        <MainStack.Screen name="CommentsScreen" component={CommentsScreen} />
+        <MainStack.Screen
+          name="CommentsScreen"
+          component={CommentsScreen}
+          options={{
+            title: "Коментарі",
+            header: ({ navigation, route, options }) => {
+              const title = getHeaderTitle(options, route.name);
+
+              return <CustomHeader title={title} backBtn navigation={navigation} />;
+            },
+          }}
+        />
         <MainStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       </MainStack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
