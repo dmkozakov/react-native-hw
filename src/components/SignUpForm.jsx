@@ -4,8 +4,11 @@ import { ActionBtn } from "./ActionBtn";
 import { PALETTE } from "../assets/common/palette";
 import { TextBtn } from "./TextBtn";
 import CustomInput from "./CustomInput";
+import { useNavigation } from "@react-navigation/native";
+import { globalStyles } from "../assets/styles/styles";
 
 export function SignUpForm() {
+  const navigation = useNavigation();
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +24,7 @@ export function SignUpForm() {
   };
 
   const onSubmit = () => {
-    console.log({ login, email, password });
+    navigation.navigate("Home");
   };
 
   return (
@@ -53,11 +56,15 @@ export function SignUpForm() {
             autoCapitalize="none"
             secureTextEntry={secureTextEntry}
           />
-          <TextBtn onPress={onShowPassword} text={showPasswordText} style={styles.showBtn} />
+          <TextBtn
+            onPress={onShowPassword}
+            text={showPasswordText}
+            style={[globalStyles.text, styles.showBtn]}
+          />
         </View>
       </View>
       <ActionBtn onPress={onSubmit} style={styles.registerBtn}>
-        <Text style={styles.registerBtnText}>Зареєструватися</Text>
+        <Text style={[globalStyles.text, styles.registerBtnText]}>Зареєструватися</Text>
       </ActionBtn>
     </>
   );
@@ -81,9 +88,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 16,
     bottom: 16,
-    fontFamily: "Roboto",
-    fontSize: 16,
-    fontWeight: "400",
     color: PALETTE.secondaryTextColor,
   },
 
@@ -95,9 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: PALETTE.accentColor,
   },
   registerBtnText: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
-    fontSize: 16,
     textAlign: "center",
     color: PALETTE.primaryBgColor,
   },

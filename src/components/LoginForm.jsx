@@ -1,12 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { StyleSheet, Text, View } from "react-native";
 import { ActionBtn } from "./ActionBtn";
 import { PALETTE } from "../assets/common/palette";
 import { TextBtn } from "./TextBtn";
 import CustomInput from "./CustomInput";
+import { useNavigation } from "@react-navigation/native";
+import { globalStyles } from "../assets/styles/styles";
 
 function LoginForm() {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -20,7 +23,7 @@ function LoginForm() {
   };
 
   const onSubmit = () => {
-    console.log({ email, password });
+    navigation.navigate("Home");
   };
 
   return (
@@ -43,11 +46,15 @@ function LoginForm() {
             autoCapitalize="none"
             secureTextEntry={secureTextEntry}
           />
-          <TextBtn onPress={onShowPassword} text={showPasswordText} style={styles.showBtn} />
+          <TextBtn
+            onPress={onShowPassword}
+            text={showPasswordText}
+            style={[globalStyles.text, styles.showBtn]}
+          />
         </View>
       </View>
       <ActionBtn onPress={onSubmit} style={styles.registerBtn}>
-        <Text style={styles.registerBtnText}>Увійти</Text>
+        <Text style={[globalStyles.text, styles.registerBtnText]}>Увійти</Text>
       </ActionBtn>
     </>
   );
@@ -70,9 +77,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 16,
     bottom: 16,
-    fontFamily: "Roboto",
-    fontSize: 16,
-    fontWeight: "400",
     color: PALETTE.secondaryTextColor,
   },
 
@@ -84,9 +88,6 @@ const styles = StyleSheet.create({
     backgroundColor: PALETTE.accentColor,
   },
   registerBtnText: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
-    fontSize: 16,
     textAlign: "center",
     color: PALETTE.primaryBgColor,
   },

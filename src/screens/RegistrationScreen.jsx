@@ -14,8 +14,13 @@ import { SignUpForm } from "../components/SignUpForm";
 import { keyboardBehavior } from "../assets/common/keyboardBehavior";
 
 import bgImage from "../assets/img/bgImage.jpg";
+import { useNavigation } from "@react-navigation/native";
+
+import { globalStyles } from "../assets/styles/styles";
 
 const RegistrationScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -28,7 +33,13 @@ const RegistrationScreen = () => {
             <Avatar />
             <Text style={styles.title}>Реєстрація</Text>
             <SignUpForm />
-            <TextBtn text={"Вже є акаунт? Увійти"} style={styles.loginBtnText} />
+            <TextBtn
+              text={"Вже є акаунт? Увійти"}
+              style={[globalStyles.text, styles.loginBtnText]}
+              onPress={() => {
+                navigation.navigate("Login");
+              }}
+            />
           </View>
         </ImageBackground>
       </KeyboardAvoidingView>
@@ -55,18 +66,14 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 92,
     marginBottom: 33,
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-500",
     fontSize: 30,
-    fontWeight: "500",
     textAlign: "center",
     color: PALETTE.primaryTextColor,
   },
   loginBtnText: {
     marginTop: 16,
     textAlign: "center",
-    fontFamily: "Roboto",
-    fontSize: 16,
-    fontWeight: "400",
     color: PALETTE.secondaryTextColor,
   },
 });

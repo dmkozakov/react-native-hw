@@ -1,11 +1,12 @@
 import { PALETTE } from "../assets/common/palette";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { globalStyles } from "../assets/styles/styles";
 
-export function TextBtn({ text, style, ...props }) {
+export function TextBtn({ text, style, onPress, ...props }) {
   return (
-    <TouchableOpacity>
-      <Text style={[styles.baseStyles, style]} {...props}>
+    <TouchableOpacity onPress={onPress}>
+      <Text style={[globalStyles.text, styles.baseStyles, style]} {...props}>
         {text}
       </Text>
     </TouchableOpacity>
@@ -14,8 +15,6 @@ export function TextBtn({ text, style, ...props }) {
 
 const styles = StyleSheet.create({
   baseStyles: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
     color: PALETTE.secondaryTextColor,
   },
 });
