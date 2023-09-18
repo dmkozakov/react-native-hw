@@ -5,10 +5,18 @@ import { Feather } from "@expo/vector-icons";
 import { PALETTE } from "../assets/common/palette";
 import { StatusBar } from "react-native";
 import { TouchableOpacity } from "react-native";
+import { useAnimatedValue } from "react-native";
+import { useNavigation } from "@react-navigation/core";
 
-function CustomHeader({ title, backBtn = null, logoutBtn = null, navigation }) {
+function CustomHeader({ title, backBtn = null, logoutBtn = null }) {
+  const navigation = useNavigation();
+
   onBackPress = () => {
     navigation.goBack();
+  };
+
+  onLogoutPress = () => {
+    navigation.navigate("Login");
   };
 
   return (
@@ -19,7 +27,7 @@ function CustomHeader({ title, backBtn = null, logoutBtn = null, navigation }) {
         </TouchableOpacity>
       )}
       {logoutBtn && (
-        <TouchableOpacity style={styles.logoutBtn}>
+        <TouchableOpacity style={styles.logoutBtn} onPress={onLogoutPress}>
           <Feather name="log-out" size={24} color={PALETTE.secondaryColor} />
         </TouchableOpacity>
       )}

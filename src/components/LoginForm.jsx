@@ -23,7 +23,7 @@ function LoginForm() {
   };
 
   const onSubmit = () => {
-    navigation.navigate("Home");
+    navigation.navigate("BottomNavigator");
   };
 
   return (

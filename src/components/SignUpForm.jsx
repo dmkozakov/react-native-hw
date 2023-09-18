@@ -24,7 +24,7 @@ export function SignUpForm() {
   };
 
   const onSubmit = () => {
-    navigation.navigate("Home");
+    navigation.navigate("BottomNavigator");
   };
 
   return (

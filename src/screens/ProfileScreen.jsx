@@ -11,6 +11,18 @@ import { useNavigation } from "@react-navigation/native";
 import { Post } from "../components/Post";
 import { LogoutBtn } from "../components/LogoutBtn";
 import { ScrollView } from "react-native";
+import { FlatList } from "react-native";
+
+import mountain from "../assets/img/mountain.jpg";
+
+const mock = [
+  { id: 1, img: mountain, text: "Ліс", comments: "8", likes: "153", location: "Ukraine" },
+  { id: 2, img: mountain, text: "Ліс", comments: "8", likes: "153", location: "Ukraine" },
+  { id: 3, img: mountain, text: "Ліс", comments: "8", likes: "153", location: "Ukraine" },
+  { id: 4, img: mountain, text: "Ліс", comments: "8", likes: "153", location: "Ukraine" },
+  { id: 5, img: mountain, text: "Ліс", comments: "8", likes: "153", location: "Ukraine" },
+  { id: 6, img: mountain, text: "Ліс", comments: "8", likes: "153", location: "Ukraine" },
+];
 
 function ProfileScreen() {
   const navigation = useNavigation();
@@ -27,9 +39,21 @@ function ProfileScreen() {
 
         <LogoutBtn />
 
-        <ScrollView contentContainerStyle={styles.postsContainer}>
-          <Post />
-        </ScrollView>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.postsContainer}
+          data={mock}
+          renderItem={({ item }) => (
+            <Post
+              photo={item.img}
+              description={item.text}
+              likes={item.likes}
+              comments={item.comments}
+              location={item.location}
+            />
+          )}
+          keyExtractor={item => item.id}
+        ></FlatList>
       </View>
     </ImageBackground>
   );
@@ -64,6 +88,7 @@ const styles = StyleSheet.create({
   },
   postsContainer: {
     paddingHorizontal: 16,
+    gap: 32,
   },
 });
 
