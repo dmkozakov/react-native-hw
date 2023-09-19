@@ -4,15 +4,6 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import CommentsScreen from "./src/screens/CommentsScreen";
-import CustomHeader from "./src/components/CustomHeader";
-import RegistrationScreen from "./src/screens/RegistrationScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import Home from "./src/screens/Home";
-import ProfileScreen from "./src/screens/ProfileScreen";
-import MapScreen from "./src/screens/MapScreen";
-
-import { getHeaderTitle } from "@react-navigation/elements";
 import { MainNavigator } from "./src/routes/MainNavigator";
 import { BottomNavigator } from "./src/routes/BottomNavigator";
 

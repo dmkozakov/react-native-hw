@@ -4,12 +4,8 @@ import { globalStyles } from "../assets/styles/styles";
 
 import { Feather } from "@expo/vector-icons";
 
-import mountain from "../assets/img/mountain.jpg";
 import { PALETTE } from "../assets/common/palette";
 import { useNavigation } from "@react-navigation/core";
-
-import { Camera } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
 
 export function Post({ photo, description, likes, comments, location }) {
   const navigation = useNavigation();
