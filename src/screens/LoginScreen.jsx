@@ -13,8 +13,12 @@ import { PALETTE } from "../assets/common/palette";
 
 import bgImage from "../assets/img/bgImage.jpg";
 import LoginForm from "../components/LoginForm";
+import { useNavigation } from "@react-navigation/native";
+import { globalStyles } from "../assets/styles/styles";
 
 export const LoginScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -26,8 +30,12 @@ export const LoginScreen = () => {
           <View style={styles.register}>
             <Text style={styles.title}>Увійти</Text>
             <LoginForm />
-            <TouchableOpacity>
-              <Text style={styles.loginBtnText}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Register");
+              }}
+            >
+              <Text style={[globalStyles.text, styles.loginBtnText]}>
                 Немає акаунту?
                 <Text style={{ textDecorationLine: "underline" }}>Зареєструватися</Text>
               </Text>
@@ -58,21 +66,15 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 32,
     marginBottom: 32,
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-500",
     fontSize: 30,
-    fontWeight: "500",
     textAlign: "center",
     color: PALETTE.primaryTextColor,
   },
 
   loginBtnText: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
     marginTop: 16,
     textAlign: "center",
-    fontFamily: "Roboto",
-    fontSize: 16,
-    fontWeight: "400",
     color: PALETTE.secondaryTextColor,
   },
 });

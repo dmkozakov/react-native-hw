@@ -19,7 +19,7 @@ function CustomInput({ placeholder, style, ...props }) {
       onBlur={handleBLur}
       style={[styles.input, style, isFocused && styles.inputActive]}
       placeholder={placeholder}
-      placeholderTextColor={PALETTE.inputColor}
+      placeholderTextColor={PALETTE.secondaryColor}
       {...props}
     />
   );
