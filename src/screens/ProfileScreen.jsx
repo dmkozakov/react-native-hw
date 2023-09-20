@@ -25,12 +25,6 @@ const mock = [
 ];
 
 function ProfileScreen() {
-  const navigation = useNavigation();
-
-  onCommentPress = () => {
-    navigation.navigate("CommentsScreen");
-  };
-
   return (
     <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
       <View style={styles.profile}>

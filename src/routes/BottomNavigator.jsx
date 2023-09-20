@@ -16,7 +16,7 @@ const Tabs = createBottomTabNavigator();
 export function BottomNavigator() {
   return (
     <Tabs.Navigator
-      backBehavior="order"
+      backBehavior="history"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -60,7 +60,7 @@ export function BottomNavigator() {
           header: ({ navigation, route, options }) => {
             const title = getHeaderTitle(options, route.name);
 
-            return <CustomHeader title={title} backBtn navigation={navigation} />;
+            return <CustomHeader title={title} backBtn navigateTo="PostsScreen" />;
           },
           tabBarStyle: {
             position: "absolute",

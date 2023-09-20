@@ -14,7 +14,7 @@ const Root = createStackNavigator();
 
 export function MainNavigator() {
   return (
-    <Root.Navigator initialRouteName="Login" backBehavior="order">
+    <Root.Navigator initialRouteName="Login" backBehavior="history">
       <Root.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Root.Screen
         name="Register"
@@ -34,7 +34,7 @@ export function MainNavigator() {
           header: ({ navigation, route, options }) => {
             const title = getHeaderTitle(options, route.name);
 
-            return <CustomHeader title={title} backBtn />;
+            return <CustomHeader title={title} backBtn navigateTo="BottomNavigator" />;
           },
         }}
       />
@@ -46,7 +46,7 @@ export function MainNavigator() {
           header: ({ navigation, route, options }) => {
             const title = getHeaderTitle(options, route.name);
 
-            return <CustomHeader title={title} backBtn />;
+            return <CustomHeader title={title} backBtn navigateTo="BottomNavigator" />;
           },
         }}
       />

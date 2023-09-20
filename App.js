@@ -4,21 +4,17 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import CommentsScreen from "./src/screens/CommentsScreen";
-import CustomHeader from "./src/components/CustomHeader";
-import RegistrationScreen from "./src/screens/RegistrationScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import Home from "./src/screens/Home";
-import ProfileScreen from "./src/screens/ProfileScreen";
-import MapScreen from "./src/screens/MapScreen";
-
-import { getHeaderTitle } from "@react-navigation/elements";
 import { MainNavigator } from "./src/routes/MainNavigator";
 import { BottomNavigator } from "./src/routes/BottomNavigator";
+import { useState } from "react";
+import { LocationProvider } from "./src/hooks/useLocation";
 
 const MainStack = createStackNavigator();
 
 export default function App() {
+  const [location, setLocation] = useState(null);
+  const value = { location, setLocation };
+
   const [fontsLoaded] = useFonts({
     "Roboto-700": require("./src/assets/fonts/Roboto-Bold.ttf"),
     "Roboto-500": require("./src/assets/fonts/Roboto-Medium.ttf"),
@@ -30,19 +26,21 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <MainStack.Navigator initialRouteName="Login">
-        <MainStack.Screen
-          name="MainNavigator"
-          component={MainNavigator}
-          options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="BottomNavigator"
-          component={BottomNavigator}
-          options={{ headerShown: false }}
-        />
-      </MainStack.Navigator>
-    </NavigationContainer>
+    <LocationProvider>
+      <NavigationContainer>
+        <MainStack.Navigator initialRouteName="Login" backBehavior="history">
+          <MainStack.Screen
+            name="MainNavigator"
+            component={MainNavigator}
+            options={{ headerShown: false }}
+          />
+          <MainStack.Screen
+            name="BottomNavigator"
+            component={BottomNavigator}
+            options={{ headerShown: false }}
+          />
+        </MainStack.Navigator>
+      </NavigationContainer>
+    </LocationProvider>
   );
 }

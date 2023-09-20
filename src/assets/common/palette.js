@@ -5,6 +5,7 @@ export const PALETTE = Object.freeze({
   primaryTransparentColor: "rgba(33, 33, 33, 0.8)",
   secondaryTextColor: "#1B4371",
   primaryBgColor: "#fff",
+  primaryBgColorTransparent: "rgba(255, 255, 255, 0.30)",
   secondaryBgColor: "#F6F6F6",
   borderColor: "#E8E8E8",
   secondaryColor: "#BDBDBD",
