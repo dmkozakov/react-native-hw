@@ -3,17 +3,21 @@ import { View, StyleSheet, Text } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
 import { PALETTE } from "../assets/common/palette";
-import { StatusBar } from "react-native";
 import { TouchableOpacity } from "react-native";
-import { useAnimatedValue } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
-function CustomHeader({ title, backBtn = null, logoutBtn = null }) {
+function CustomHeader({ title, backBtn = null, logoutBtn = null, navigateTo = null }) {
   const navigation = useNavigation();
 
-  onBackPress = () => {
-    navigation.goBack();
-  };
+  if (navigateTo) {
+    onBackPress = () => {
+      navigation.navigate(navigateTo);
+    };
+  } else {
+    onBackPress = () => {
+      navigation.goBack(null);
+    };
+  }
 
   onLogoutPress = () => {
     navigation.navigate("Login");

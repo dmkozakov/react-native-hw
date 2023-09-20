@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { globalStyles } from "../assets/styles/styles";
 
@@ -12,6 +12,10 @@ export function Post({ photo, description, likes, comments, location }) {
 
   onLocationPress = () => {
     navigation.navigate("MapScreen");
+  };
+
+  onCommentPress = () => {
+    navigation.navigate("CommentsScreen");
   };
   return (
     <View style={styles.post}>

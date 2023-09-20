@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet, Keyboard } from "react-native";
 
 import { PALETTE } from "../assets/common/palette";

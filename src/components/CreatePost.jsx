@@ -4,6 +4,8 @@ import { View, TouchableOpacity, Text, TextInput, StyleSheet } from "react-nativ
 import { CameraBox } from "./CameraBox";
 import { PhotoBox } from "./PhotoBox";
 
+import * as Location from "expo-location";
+
 import { Feather } from "@expo/vector-icons";
 
 import { globalStyles } from "../assets/styles/styles";
@@ -11,15 +13,19 @@ import { ActionBtn } from "./ActionBtn";
 import { PALETTE } from "../assets/common/palette";
 
 import { useNavigation } from "@react-navigation/core";
+import { useLocation } from "../hooks/useLocation";
 
 export function CreatePost() {
-  const navigation = useNavigation();
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
+  const { setLocation, setTitle, setDescription } = useLocation();
+
+  const [title, setLocationTitle] = useState("");
+  const [description, setLocationDescription] = useState("");
   const [photo, setPhoto] = useState(null);
 
-  const publishActive = photo && location && description;
-  const deleteActive = photo || location || description;
+  const navigation = useNavigation();
+
+  const publishActive = photo && description && title;
+  const deleteActive = photo || description || title;
   const disabled = !publishActive;
 
   onCameraPress = async () => {
@@ -34,19 +40,34 @@ export function CreatePost() {
     setPhoto(null);
   };
 
-  onPublishBtnPress = () => {
+  onPublishBtnPress = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.log("Permission to access location was denied");
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    const coords = {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    };
+
     navigation.navigate("PostsScreen");
 
-    setDescription("");
-    setLocation("");
+    setLocation(coords);
+    setDescription(description);
+    setTitle(title);
+
+    setLocationTitle("");
+    setLocationDescription("");
     setPhoto(null);
 
-    return console.log({ photo, description, location });
+    return console.log({ photo, title, description, location: coords });
   };
 
   onDelete = () => {
-    setDescription("");
-    setLocation("");
+    setLocationTitle("");
+    setLocationDescription("");
     setPhoto(null);
   };
 
@@ -63,12 +84,12 @@ export function CreatePost() {
 
         <View style={styles.inputsBox}>
           <TextInput
-            style={[globalStyles.text, styles.input, description && styles.nameInput]}
+            style={[globalStyles.text, styles.input, title && styles.nameInput]}
             placeholder="Назва..."
             placeholderTextColor={PALETTE.secondaryColor}
             underlineColorAndroid={PALETTE.borderColor}
-            value={description}
-            onChangeText={setDescription}
+            value={title}
+            onChangeText={setLocationTitle}
           />
           <View>
             <TextInput
@@ -76,8 +97,8 @@ export function CreatePost() {
               placeholder="Місцевість..."
               placeholderTextColor={PALETTE.secondaryColor}
               underlineColorAndroid={PALETTE.borderColor}
-              value={location}
-              onChangeText={setLocation}
+              value={description}
+              onChangeText={setLocationDescription}
             />
             <Feather
               style={styles.locationIcon}
