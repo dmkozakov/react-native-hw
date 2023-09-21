@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, Image, View } from "react-native";
+import { StyleSheet, Image, View, ScrollView } from "react-native";
 import { CommentCard } from "./CommentCard";
-import { ScrollableContainer } from "./ScrollableContainer";
 import { PALETTE } from "../assets/common/palette";
 
 import examplePost from "../assets/img/examplePost.jpg";
@@ -15,7 +14,7 @@ export default function CommentPost() {
         <Image style={styles.photo} source={examplePost} />
       </View>
 
-      <ScrollableContainer contentContainerStyle={styles.commentsBox}>
+      <ScrollView contentContainerStyle={styles.commentsBox}>
         <CommentCard
           userPhoto={user1}
           text="Really love your most recent photo. I’ve been trying to capture the same thing for
@@ -30,7 +29,7 @@ export default function CommentPost() {
           date="09 червня, 2020 | 09:14"
           owner
         />
-      </ScrollableContainer>
+      </ScrollView>
     </View>
   );
 }

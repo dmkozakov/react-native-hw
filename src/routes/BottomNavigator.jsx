@@ -55,6 +55,7 @@ export function BottomNavigator() {
       <Tabs.Screen
         name="CreatePostsScreen"
         component={CreatePostsScreen}
+        unmountOnBlur
         options={{
           title: "Створити публікацію",
           header: ({ navigation, route, options }) => {

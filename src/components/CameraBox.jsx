@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
-
-import { FontAwesome } from "@expo/vector-icons";
+import { View, StyleSheet, Text, Image } from "react-native";
 
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { PALETTE } from "../assets/common/palette";
 import { globalStyles } from "../assets/styles/styles";
+import CameraBtnIcon from "./CameraBtnIcon";
 
-export function CameraBox({ onPhoto }) {
+export function CameraBox({ photoUri, isLoading, onCameraPress, onEditPhotoPress, cameraRef }) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [cameraRef, setCameraRef] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      await MediaLibrary.requestPermissionsAsync();
+      try {
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        await MediaLibrary.requestPermissionsAsync();
 
-      setHasPermission(status === "granted");
+        setHasPermission(status === "granted");
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
 
@@ -28,25 +30,23 @@ export function CameraBox({ onPhoto }) {
     return <Text>No access to camera</Text>;
   }
 
-  onCameraPress = async () => {
-    if (cameraRef) {
-      const { uri } = await cameraRef.takePictureAsync();
-      onPhoto(uri);
-      await MediaLibrary.createAssetAsync(uri);
-    }
-  };
   return (
     <View>
       <View style={{ borderRadius: 8, overflow: "hidden" }}>
-        <Camera style={styles.photoBox} ratio="4:3" ref={setCameraRef}>
-          <TouchableOpacity onPress={onCameraPress}>
-            <View style={styles.photoIcon}>
-              <FontAwesome name="camera" size={24} color={PALETTE.secondaryColor} />
-            </View>
-          </TouchableOpacity>
-        </Camera>
+        {!photoUri ? (
+          <Camera style={styles.photoBox} ratio="4:3" ref={cameraRef}>
+            <CameraBtnIcon onPress={onCameraPress} isLoading={isLoading} photo={photoUri} />
+          </Camera>
+        ) : (
+          <>
+            <Image source={{ uri: photoUri }} style={styles.photo} />
+            <CameraBtnIcon onPress={onEditPhotoPress} isLoading={isLoading} photo={photoUri} />
+          </>
+        )}
       </View>
-      <Text style={[globalStyles.text, styles.photoText]}>Завантажте фото</Text>
+      <Text style={[globalStyles.text, styles.photoText]}>
+        {!photoUri ? "Завантажте фото" : "Редагувати фото"}
+      </Text>
     </View>
   );
 }
