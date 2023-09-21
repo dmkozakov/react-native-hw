@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, TextInput, StyleSheet } from "react-native";
 
+import * as MediaLibrary from "expo-media-library";
+
 import { CameraBox } from "./CameraBox";
-import { PhotoBox } from "./PhotoBox";
 
 import * as Location from "expo-location";
 
@@ -18,9 +19,11 @@ import { useLocation } from "../hooks/useLocation";
 export function CreatePost() {
   const { setLocation, setTitle, setDescription } = useLocation();
 
-  const [title, setLocationTitle] = useState("");
-  const [description, setLocationDescription] = useState("");
+  const [cameraRef, setCameraRef] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [title, setLocationTitle] = useState(null);
+  const [description, setLocationDescription] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigation = useNavigation();
 
@@ -29,10 +32,18 @@ export function CreatePost() {
   const disabled = !publishActive;
 
   onCameraPress = async () => {
-    if (cameraRef) {
-      const { uri } = await cameraRef.takePictureAsync();
-      setPhoto(uri);
-      await MediaLibrary.createAssetAsync(uri);
+    try {
+      if (cameraRef) {
+        setIsLoading(true);
+        const { uri } = await cameraRef.takePictureAsync();
+        setPhoto(uri);
+        await MediaLibrary.createAssetAsync(uri);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -41,46 +52,50 @@ export function CreatePost() {
   };
 
   onPublishBtnPress = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      console.log("Permission to access location was denied");
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const coords = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      };
+
+      navigation.navigate("PostsScreen");
+
+      setLocation(coords);
+      setDescription(description);
+      setTitle(title);
+
+      setLocationTitle(null);
+      setLocationDescription(null);
+      setPhoto(null);
+
+      return console.log({ photo, title, description, location: coords });
+    } catch (error) {
+      console.log(error);
     }
-
-    let location = await Location.getCurrentPositionAsync({});
-    const coords = {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    };
-
-    navigation.navigate("PostsScreen");
-
-    setLocation(coords);
-    setDescription(description);
-    setTitle(title);
-
-    setLocationTitle("");
-    setLocationDescription("");
-    setPhoto(null);
-
-    return console.log({ photo, title, description, location: coords });
   };
 
   onDelete = () => {
-    setLocationTitle("");
-    setLocationDescription("");
+    setLocationTitle(null);
+    setLocationDescription(null);
     setPhoto(null);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.createPostBox}>
-        <View>
-          {!photo ? (
-            <CameraBox onPhoto={setPhoto} />
-          ) : (
-            <PhotoBox photoUri={photo} onPress={onEditPhotoPress} />
-          )}
-        </View>
+        <CameraBox
+          isLoading={isLoading}
+          onCameraPress={onCameraPress}
+          onEditPhotoPress={onEditPhotoPress}
+          photoUri={photo}
+          cameraRef={setCameraRef}
+        />
 
         <View style={styles.inputsBox}>
           <TextInput

@@ -7,8 +7,20 @@ import CustomInput from "./CustomInput";
 import { useNavigation } from "@react-navigation/native";
 import { globalStyles } from "../assets/styles/styles";
 
+import { loginDB, registerDB } from "../../db/controllers/auth/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../redux/auth/operations";
+import { selectIsLoggedIn } from "../redux/auth/selectors";
+
+// const result = registerDB({ email: "example@gmail.com", password: "qwe123" });
+// loginDB({ email: "example@gmail.com", password: "qwe123" }).then(console.log);
+
 export function SignUpForm() {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+  const value = useSelector(selectIsLoggedIn);
+  console.log(value);
+
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +35,8 @@ export function SignUpForm() {
       : setShowPasswordText("Показати");
   };
 
-  const onSubmit = () => {
+  const onSubmit = ({ login, email, password }) => {
+    dispatch(register({ login, email, password }));
     navigation.navigate("BottomNavigator");
   };
 
